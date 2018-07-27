@@ -1,0 +1,82 @@
+{
+    "macros": [
+        "MBEDTLS_USER_CONFIG_FILE=\"mbedTLSConfig_mbedOS.h\"",
+        "PAL_USER_DEFINED_CONFIGURATION=\"sotp_fs_config_MbedOS.h\"",
+        "MBED_CLIENT_USER_CONFIG_FILE=\"mbed_cloud_client_user_config.h\"",
+        "MBED_CLOUD_CLIENT_USER_CONFIG_FILE=\"mbed_cloud_client_user_config.h\"",
+        "PAL_DTLS_PEER_MIN_TIMEOUT=5000",
+        "MBED_CONF_APP_MAIN_STACK_SIZE=4608",
+        "PAL_INT_FLASH_NUM_SECTIONS=2",
+        "MBED_ALL_STATS_ENABLED=1"
+    ],
+    "target_overrides": {
+        "*": {
+            "platform.stdio-baud-rate": 115200,
+            "platform.stdio-convert-newlines": true,
+            "mbed-client.event-loop-size": 1024,
+            "mbed-trace.enable": 1,
+            "storage-selector.filesystem" : "FAT",
+            "storage-selector.mount-point": "\"sd\"",
+            "storage-selector.storage"    : "SD_CARD",
+            "update-storage": "ARM_UCP_FILESYSTEM"
+        },
+        "K64F": {
+            "update-client.bootloader-details"  : "0x00006078",
+            "sotp-section-1-address"            : "( 32*1024)",
+            "sotp-section-1-size"               : "(  4*1024)",
+            "sotp-section-2-address"            : "( 36*1024)",
+            "sotp-section-2-size"               : "(  4*1024)",
+            "update-client.application-details" : "( 40*1024)",
+            "target.mbed_app_start"             : "0x0000a400",
+            "update-client.storage-address"     : "(436*1024)",
+            "update-client.storage-size"        : "(388*1024)",
+            "update-client.storage-locations"   : 1,
+            "update-client.storage-page"        : 8,
+            "flashiap-block-device.base-address": "(824*1024)",
+            "flashiap-block-device.size"        : "(200*1024)"
+        }
+    },
+    "config": {
+        "developer-mode": {
+            "help": "Use the Mbed Cloud Client developer mode",
+            "value" : 1
+        },
+        "update-storage": {
+            "help": "Options are ARM_UCP_FLASHIAP, ARM_UCP_REALTEK_RTL8195AM, ARM_UCP_FILESYSTEM, ARM_UCP_FLASHIAP_BLOCKDEVICE",
+            "macro_name": "MBED_CLOUD_CLIENT_UPDATE_STORAGE",
+            "value": "ARM_UCP_FILESYSTEM"
+        },
+        "network-interface": {
+            "help": "Options are ETHERNET, WIFI_ESP8266, WIFI_ODIN, WIFI_RTW",
+            "value": "ETHERNET"
+        },
+        "wifi-ssid": {
+            "help": "WiFi SSID",
+            "value": "\"SSID\""
+        },
+        "wifi-password": {
+            "help": "WiFi Password",
+            "value": "\"Password\""
+        },
+        "sotp-section-1-address": {
+            "help": "Flash sector address for SOTP sector 1",
+            "macro_name": "PAL_INTERNAL_FLASH_SECTION_1_ADDRESS",
+            "value": null
+        },
+        "sotp-section-1-size": {
+            "help": "Flash sector size for SOTP sector 1",
+            "macro_name": "PAL_INTERNAL_FLASH_SECTION_1_SIZE",
+            "value": null
+        },
+        "sotp-section-2-address": {
+            "help": "Flash sector address for SOTP sector 2",
+            "macro_name": "PAL_INTERNAL_FLASH_SECTION_2_ADDRESS",
+            "value": null
+        },
+        "sotp-section-2-size": {
+            "help": "Flash sector size for SOTP sector 2",
+            "macro_name": "PAL_INTERNAL_FLASH_SECTION_2_SIZE",
+            "value": null
+        }
+    }
+}
